@@ -1,24 +1,20 @@
 // server.js
-require('dotenv').config(); // Cargar variables de entorno
 const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
+const { connectDB } = require('./config/database');
+const usuarioRoutes = require('./routes/usuarioRoutes');
+
 const app = express();
-
-// Middlewares
-app.use(express.json()); // Parsear JSON en las solicitudes
-app.use(morgan('dev')); // Registrar solicitudes HTTP en desarrollo
-app.use(cors()); // Habilitar CORS
-
-// Variables de entorno
 const PORT = process.env.PORT || 3000;
 
-// Rutas (aquí añadiremos las rutas más adelante)
-app.get('/', (req, res) => {
-  res.send('¡Bienvenido al servidor de sistema de exámenes!');
-});
+// Conectar a la base de datos
+connectDB();
 
-// Iniciar el servidor
+// Middlewares
+app.use(express.json());
+
+// Rutas
+app.use('/api', usuarioRoutes);
+
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
