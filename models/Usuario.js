@@ -1,8 +1,7 @@
-// models/Usuario.js
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../configBD/database');
 
-const Usuario = sequelize.define('Usuarios', { // Cambia 'Usuario' por 'Usuarios'
+const Usuario = sequelize.define('usuario', {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -29,9 +28,9 @@ const Usuario = sequelize.define('Usuarios', { // Cambia 'Usuario' por 'Usuarios
     allowNull: false,
   },
 }, {
-  tableName: 'usuarios', // Asegúrate de que el nombre de la tabla es 'usuarios'
+  // Configuración para desactivar las columnas createdAt y updatedAt
+  timestamps: false,
 });
-
 
 // Asegúrate de que el modelo se exporte correctamente
 module.exports = Usuario;
