@@ -1,8 +1,8 @@
 // models/Usuario.js
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { sequelize } = require('../configBD/database');
 
-const Usuario = sequelize.define('Usuario', {
+const Usuario = sequelize.define('Usuarios', { // Cambia 'Usuario' por 'Usuarios'
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -28,6 +28,10 @@ const Usuario = sequelize.define('Usuario', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+}, {
+  tableName: 'usuarios', // Asegúrate de que el nombre de la tabla es 'usuarios'
 });
 
+
+// Asegúrate de que el modelo se exporte correctamente
 module.exports = Usuario;
