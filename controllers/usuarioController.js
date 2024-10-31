@@ -1,5 +1,5 @@
 // controllers/usuarioController.js
-const { Usuario } = require('../models'); // Asegúrate de que exista el modelo Usuario
+const { Usuario } = require('../models/Usuario'); // Asegúrate de que exista el modelo Usuario
 
 // Controlador para crear un usuario
 const crearUsuario = async (req, res) => {
