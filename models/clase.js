@@ -6,12 +6,13 @@ const Clase = sequelize.define('Clase', {
   codigo_asignatura: {
     type: DataTypes.STRING(20),
     allowNull: false,
+    primaryKey: true, // Definir como clave primaria
     references: {
       model: 'materias', // Relación con la tabla de materias
       key: 'codigo_asignatura',
     },
   },
-  nombre_clase: {
+  nombre_asignatura: { // Cambiado para coincidir con la columna de la tabla SQL
     type: DataTypes.STRING(100),
     allowNull: false,
   },
@@ -29,7 +30,7 @@ const Clase = sequelize.define('Clase', {
   },
 }, {
   tableName: 'clases',
-  timestamps: true, // Cambia a true si deseas manejar createdAt y updatedAt
+  timestamps: true, // Mantiene createdAt y updatedAt
 });
 
 module.exports = Clase;

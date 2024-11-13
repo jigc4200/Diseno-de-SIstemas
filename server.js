@@ -4,6 +4,7 @@ const { connectDB } = require('./config/database');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const auditoriaRoutes = require('./routes/auditoriaRoutes');
 const materiaRoutes = require('./routes/materia-routes');
+const  clasesRoutes  = require('./routes/clase-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use('/api', usuarioRoutes);
 app.use('/api', auditoriaRoutes);
 app.use('/api', auditoriaRoutes);
 app.use('/api', materiaRoutes);
+app.use('/api',clasesRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
