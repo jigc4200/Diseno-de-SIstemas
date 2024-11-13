@@ -3,14 +3,13 @@ const Usuario = require('../models/Usuario'); // Para validar que el profesor ex
 
 // Crear una materia
 const crearMateria = async (req, res) => {
-    const { codigo_asignatura, nombre_asignatura } = req.body;
+    const { codigo_asignatura, nombre_asignatura, departamento_id } = req.body;
 
     try {
         const nuevaMateria = await Materia.create({
             codigo_asignatura,
             nombre_asignatura,
-            departamento_id, // Agrega departamento_id aquí
-
+            departamento_id, 
         });
 
         return res.status(201).json({

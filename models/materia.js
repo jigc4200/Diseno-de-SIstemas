@@ -11,19 +11,12 @@ const Materia = sequelize.define('Materia', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    profesor_id: {
+    
+    departamento_id: { 
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false, 
         references: {
-            model: 'usuarios', // Debe coincidir con el nombre de la tabla en la base de datos
-            key: 'id',
-        },
-    },
-    departamento_id: { // Asegúrate de que esta columna esté definida
-        type: DataTypes.INTEGER,
-        allowNull: false, // Cambia esto según si es obligatorio o no
-        references: {
-            model: 'departamentos', // Nombre de la tabla que referencia
+            model: 'departamentos', // Nombre de la tabla 
             key: 'id',
         },
     },
