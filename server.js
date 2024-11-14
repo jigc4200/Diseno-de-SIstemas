@@ -6,6 +6,7 @@ const auditoriaRoutes = require('./routes/auditoriaRoutes');
 const materiaRoutes = require('./routes/materia-routes');
 const  clasesRoutes  = require('./routes/clase-routes');
 const examenRoutes = require('./routes/examen-routes');
+const ReciboRoutes = require('./routes/recibo-pago-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ app.use('/api', auditoriaRoutes);
 app.use('/api', materiaRoutes);
 app.use('/api',clasesRoutes);
 app.use('/api',examenRoutes);
+app.use('/api',ReciboRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
