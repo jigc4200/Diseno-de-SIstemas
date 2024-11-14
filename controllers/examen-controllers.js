@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const  Examen = require('../models/examen');
 
 // Función para crear un examen
@@ -51,10 +52,34 @@ const actualizarEstado = async (req, res) => {
   }
 };
 
-// Función para listar todos los exámenes
+// Función para listar todos los exámenes // deprecated 
+/*
 const listarExamenes = async (req, res) => {
   try {
     const examenes = await Examen.findAll();
+
+    return res.status(200).json(examenes);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error al obtener los exámenes',
+      error: error.message,
+    });
+  }
+};
+*/
+const listarExamenes = async (req, res) => {
+  const { estado, estudiante_id, tipo, codigo_asignatura } = req.query; // Extrae los filtros de la consulta
+
+  try {
+    // Construye el objeto de condiciones dinámicamente
+    const filtros = {};
+    if (estado) filtros.estado = estado;
+    if (estudiante_id) filtros.estudiante_id = estudiante_id;
+    if (tipo) filtros.tipo = tipo;
+    if (codigo_asignatura) filtros.codigo_asignatura = codigo_asignatura;
+
+    // Ejecuta la consulta con los filtros
+    const examenes = await Examen.findAll({ where: filtros });
 
     return res.status(200).json(examenes);
   } catch (error) {
