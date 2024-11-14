@@ -62,7 +62,49 @@ const listarClasesPorFiltro = async (req, res) => {
   }
 };
 
+// Editar clase
+const editarClase = async (req, res) => {
+  const { codigo_asignatura } = req.params;  // El código de la asignatura será único para cada clase
+  const { nombre_asignatura, profesor_id, fecha_clase } = req.body;
+
+  try {
+    // Verificar si la clase existe
+    const clase = await Clase.findOne({ where: { codigo_asignatura } });
+    
+    if (!clase) {
+      return res.status(404).json({ message: 'Clase no encontrada' });
+    }
+
+    // Si se proporciona un profesor_id, verificar que el profesor exista
+    if (profesor_id) {
+      const profesor = await Usuario.findByPk(profesor_id);
+      if (!profesor) {
+        return res.status(404).json({ message: 'Profesor no encontrado' });
+      }
+    }
+
+    // Actualizar los campos de la clase
+    clase.nombre_asignatura = nombre_asignatura || clase.nombre_asignatura;
+    clase.profesor_id = profesor_id || clase.profesor_id;
+    clase.fecha_clase = fecha_clase || clase.fecha_clase;
+
+    // Guardar los cambios
+    await clase.save();
+
+    res.status(200).json({
+      message: 'Clase actualizada exitosamente',
+      clase,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error al actualizar la clase',
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
+  editarClase,
   crearClase,
   listarClases,
   listarClasesPorFiltro,
